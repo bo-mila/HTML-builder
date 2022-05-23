@@ -6,13 +6,13 @@ const filePath = path.join(__dirname, './text.txt');
 
 const cbError = (file, err) => {
   if (!err) return;
-  console.log(`Something wrong with file ${file}`);
-  console.log(err);
+  stdout.write(`Something wrong with file ${file}`);
+  stdout.write(err);
   process.exit(0);
 };
 
 const onExit = () => {
-  console.log('Ok. Goodbye ;)');
+  stdout.write('Ok. Goodbye ;)');
   process.exit(0);
   
 };
