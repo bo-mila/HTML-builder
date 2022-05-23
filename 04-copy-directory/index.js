@@ -7,14 +7,15 @@ const copyFolderPath = path.join(__dirname, 'files-copy');
 
 const cleanFolder = async (folder) => {
   const directoryContent = await fs.promises.readdir(folder, { withFileTypes: true });
-  directoryContent.forEach(async (item) => {
+  const list = directoryContent.map(async (item) => {
     const cleanPath = path.join(folder, item.name);
     if (item.isFile()) await fs.promises.unlink(cleanPath);
     else {
-      await cleanFolder(cleanPath, true);
+      await cleanFolder(cleanPath);
       await fs.promises.rmdir(cleanPath);
     }
   });
+  return Promise.all(list);
 };
 
 const createFolder = async (folderPath) => {

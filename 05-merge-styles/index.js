@@ -12,7 +12,7 @@ const getStyleFileList = async (folder, ext) => {
   const list = [];
   directoryContent.forEach(async (item) => {
     const srcPath = path.join(folder, item.name);
-    if (!item.isFile()) list.push(await getStyleFileList(srcPath));
+    if (!item.isFile()) list.push(...await getStyleFileList(srcPath, ext));
     if (path.extname(srcPath).substring(1) === ext) list.push(srcPath);
   });
   return list;
