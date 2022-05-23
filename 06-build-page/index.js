@@ -95,11 +95,7 @@ const createStyle = async (srcStyleFolder, disFolder, bundleStyle) => {
 };
 
 const copyFile = async (filePath, copyFilePath) => {
-  const ws = fs.createWriteStream(copyFilePath);
-  const rs = fs.createReadStream(filePath, 'utf-8');
-  for await (const chunk of rs) {
-    ws.write(chunk);
-  }
+  await fs.promises.copyFile(filePath, copyFilePath);
 };
 
 const copyAssets = async (folderPath = '.', copyFolderPath) => {
